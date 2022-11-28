@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8"/>
+
+    <title>Economics Project ᓚᘏᗢ</title>
+    <link rel="stylesheet" href="app.css" />
+    <script src="app.js"></script>
+  </head>
+  <body>
+    <div id="terminal">
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+      <p>&zwnj;</p>
+    </div>
+    <div id="info">
+      <p id="loaninfo">Loan: 0 left to pay</p>
+      <p id="fundsinfo">Funds: 0</p>
+    </div>
+    <div id="startinfo">
+      <h1 class="title">Start Your Business</h1>
+      <h3 class="title">Select the Name And Project</h3>
+      <div class="center">
+        <input type="text" id="startinfo-Name" placeholder="Business Name"></input>
+        <input type="text" id="startinfo-Product" placeholder="Product"></input><br>
+        <button onclick="SetStart(document.getElementById('startinfo-Name').value,document.getElementById('startinfo-Product').value);">Start Game</button>
+      </div>
+    </div>
+    <div id="game" style="display:none;">
+      <div id="tabs">
+        <div onclick="setTab(1);">Loans</div>
+        <div onclick="setTab(2);" class="hasBusinessName">&zwnj;</div>
+        <div onclick="setTab(3);">Investing</div>
+        <!-- <div onclick="setTab(4)">Tab Title</div>
+        <div onclick="setTab(5)">Tab Title</div> -->
+      </div>
+      <div  class="menu">
+        <h1 class="title">Loans</h1>
+        <div id="loanbuttons">
+          <button onclick="setLoan(100000,.05,true,60000)">$1,000.00 at 5% simple</button>
+          <button onclick="setLoan(100000,.02,false,60000)">$1,000.00 at 2% compounding</button>
+          <button onclick="setLoan(250000,.1,true,60000)">$2,500.00 at 10% simple</button>
+          <button onclick="setLoan(500000,.03,false,60000)">$5,000.00 at 3% compounding</button>
+          <button onclick="setLoan(1000000,.1,true,60000)">$10,000.00 at 10% simple</button>
+          <button onclick="setLoan(1000000,.05,false,60000)">$10,000.00 at 5% compounding</button>
+        </div>
+        <div id="afterloan" style="display: none;">
+          <input type="text" id="afterloan-payamm"></input>
+          <button onclick='payLoan(document.getElementById("afterloan-payamm").value)'>Pay Off</button>
+        </div>
+      </div>
+      <div style="display: none" class="menu">
+        <h1 class="title hasBusinessName">&zwnj;</h1>
+        <button onclick="MakeProduct(1)">Make <span class="hasBusinessProduct">&zwnj;</span></button>
+        <p id="unsoldProductInfo">Unsold: 0</p>
+        <button onclick="addPrice(-1)">Lower</button>
+        <button onclick="addPrice(1)">Raise</button>
+        <p id="pricePerProduct" style="display: inline;">Price per <span class="hasBusinessProduct">&zwnj;</span>: $0.01</p>
+        <p id="demandinfo">Demand: 10%</p>
+        <br><br>
+        <button onclick="purchaseMats(1)" >Purchase</button>
+        <p id="matsinfo" style="display: inline;" >Materials: 0</p>
+        <p id="matsprice">Cost: $0.1</p>
+      </div>
+      <div style="display: none" class="menu">
+        <h1 class="title">Investing</h1></div>
+      <div style="display: none" class="menu">
+        <h1 class="title">Bankrupt (┬┬﹏┬┬)</h1>
+        <button class="center" id="bankruptbutton" onclick="Init()">Declare Bankruptcy and restart</button>
+      </div>
+      <div style="display: none" class="menu"></div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,125 @@
+:root {
+  --fore-color: #e1e1e1;
+  --term-color: var(--fore-color);
+  --term-back-color: #000000;
+  --back-color: #101010;
+  --game-back-color: #050505;
+  --tab-even: #202020;
+  --tab-hover: #202060;
+  --tab-hover-secondary: #494989;
+  --tab-odd: #101010;
+  --button-color: #a0a0a0;
+  --button-back-color: #303030;
+  --button-border-color: #000040;
+}
+p {
+  color: var(--fore-color);
+}
+#terminal {
+  background-color: var(--term-back-color);
+  width: 80vw;
+  height: 10vh;
+  color: var(--term-color);
+  margin: 2vh 2vw 2vh 2vw;
+  border-radius: 25px;
+}
+#terminal > p,
+#info > p {
+  margin: 0.4vh;
+  margin-left: 0.4vh;
+  font-size: 1.3vh;
+}
+
+#info {
+  position: absolute;
+  right: 2vw;
+  top: 2vh;
+  background-color: var(--term-back-color);
+  width: 14vw;
+  height: 10vh;
+  color: var(--fore-color);
+  border-radius: 25px;
+}
+#game,
+#startinfo {
+  height: 82vh;
+  width: 96vw;
+  margin: 2vh 2vw 2vh 2vw;
+  border-radius: 25px;
+  background-color: var(--game-back-color);
+}
+#tabs {
+  margin: auto;
+  display: grid;
+  grid-gap: 10px;
+  border-radius: 25px;
+  width: 98%;
+}
+#tabs > div:nth-child(1) {
+  border-radius: 25px 0 0 25px;
+}
+#tabs > div:last-child {
+  border-radius: 0 25px 25px 0;
+}
+#tabs > div:nth-child(even) {
+  background-color: var(--tab-even);
+}
+#tabs > div {
+  color: var(--fore-color);
+  background-color: var(--tab-odd);
+  grid-row-start: 1;
+  text-align: center;
+  font-size: 1.5em;
+}
+#tabs > div:hover,
+button:hover,
+input:hover {
+  background-color: var(--tab-hover-secondary);
+  box-shadow: inset 0 -3em 3em var(--tab-hover), 0 0 0 2px var(--tab-hover),
+    0.3em 0.3em 1em var(--tab-hover);
+}
+.title {
+  margin: 0;
+  text-align: center;
+  color: var(--fore-color);
+}
+.center {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  transform: translate(-50%, -50%);
+}
+.menu {
+  margin-top: 2em;
+}
+#loanbuttons {
+  display: grid;
+  width: 30vw;
+  height: 60vh;
+  gap: 2vw 2vw;
+  margin: auto;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+}
+#loanbuttons > button:nth-child(even) {
+  grid-column-start: 2;
+}
+#loanbuttons > button {
+  grid-column-start: 1;
+  font-size: 2vh;
+}
+#bankruptbutton {
+  margin: 0;
+  width: 40vw;
+  height: 40vh;
+  font-size: 8vh;
+}
+button,
+input {
+  background-color: var(--button-back-color);
+  color: var(--button-color);
+  border-color: var(--button-border-color);
+}
+body {
+  background-color: var(--back-color);
+  overflow: hidden;
+}
