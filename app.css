@@ -11,8 +11,12 @@
   --button-color: #a0a0a0;
   --button-back-color: #303030;
   --button-border-color: #000040;
+  --stock-dec-color: #e10000;
+  --stock-inc-color: #00e100;
 }
-p {
+p,
+h1,
+h3 {
   color: var(--fore-color);
 }
 #terminal {
@@ -91,6 +95,25 @@ input:hover {
 }
 .menu {
   margin-top: 2em;
+}
+#stockscontainer {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2vw 2vw;
+  margin: auto;
+  grid-auto-rows: 100px;
+}
+#stockscontainer > div > div:nth-child(even) {
+  background-color: var(--tab-even);
+}
+#stockscontainer > div > div {
+  background-color: var(--tab-odd);
+}
+.stockdec {
+  color: var(--stock-dec-color);
+}
+.stockinc {
+  color: var(--stock-inc-color);
 }
 #loanbuttons {
   display: grid;
