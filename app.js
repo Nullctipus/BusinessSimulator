@@ -38,12 +38,12 @@ var stockscontainerHTML = document.getElementById("stockscontainer");
 
 const TERMLINECOUNT = 5
 const MATSPERPRODUCT = 2;
-const POPULATION = 100;
+const POPULATION = 10;
 const MATSPERPURCASE = 1000;
 
-const PURCHASEUPDATETIME = 10000;
+const PURCHASEUPDATETIME = 10;
 const MATSUPDATETIME = 10000;
-const MAKERUPDATETIME = 10000;
+const MAKERUPDATETIME = 1;
 const MATSOFFSETTIME = 2000;
 const MAKEROFFSETTIME = 1000;
 const STOCKUPDATETIME = 10000;
@@ -107,7 +107,7 @@ function BuyAutoMaker() {
     }
     addFunds(-autoMakerCost);
     automakers++;
-    autoMakerCost <<= 1;
+    autoMakerCost *= 2;
     autoMakerCostHTML.innerText = "Cost $" + asDollars(autoMakerCost);
 
 }
@@ -118,7 +118,7 @@ function BuyMarketing() {
     }
     addFunds(-marketingCost);
     marketing++;
-    marketingCost <<= 1;
+    marketingCost *= 2;
     marketingCostHTML.innerText = "Cost $" + asDollars(marketingCost);
     demand = (marketing / asDollars(price)) / 100
     demandHTML.innerText = "Demand: " + Math.round(demand * 100) + "%"
@@ -128,9 +128,9 @@ function UpdateAutoMakers() {
     var amm = 0;
     for (var i = 0; i < automakers; i++) {
         var rand = Math.random();
-        if (rand < .1)
+        if (rand < .75)
             continue;
-        if (rand < .85)
+        if (rand < .95)
             amm += 1;
         else
             amm += 2;
@@ -165,7 +165,7 @@ function addPrice(aprice) {
 }
 
 function randomMatsPrice() {
-    matprice += Math.trunc((Math.random() - .5) * 500);
+    matprice = Math.max(1000, matprice + Math.trunc((Math.random() - .5) * 500));
     matpriceHTML.innerText = "Cost: $" + asDollars(matprice);
 }
 function purchaseMats(amount) {
@@ -230,7 +230,7 @@ function stocksUpdate() {
                 vc = Math.random() * change;
                 stockscontainerHTML.children[risk].children[i].children[0].innerText = stocks[risk][i - 1].name + " △ " + asDollars(Math.trunc(vc));
             }
-            stocks[risk][i - 1].price = Math.trunc(Math.max(0, stocks[risk][i - 1].price + vc));
+            stocks[risk][i - 1].price = Math.trunc(Math.max(1, stocks[risk][i - 1].price + vc));
             stockscontainerHTML.children[risk].children[i].children[1].innerHTML = "Per Share: $" + asDollars(stocks[risk][i - 1].price) + "<br>Owned: " + stocks[risk][i - 1].owned;
         }
     }
@@ -245,7 +245,7 @@ function BuyStock(risk, index, amount) {
         logError("failed to buy " + amount + " " + name + " because funds are too low");
         return;
     }
-    if (asInt > stocks[risk][index - 1].owned) {
+    if (asInt < 0 && (-1 * asInt) > stocks[risk][index - 1].owned) {
         logError("You do not have " + amount + " " + name);
         return;
     }
@@ -343,6 +343,8 @@ addEventListener('DOMContentLoaded', (event) => {
     logSuccess("This is a Success");
 });
 function PurchaseUpdate() {
+    if (isNaN(mats)) mats = 0;
+    if (isNaN(product)) product = 0;
     if (product > 0) {
         var amm = Math.floor(POPULATION * demand);
         //Chance the amount gets added
